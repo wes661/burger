@@ -3,57 +3,34 @@ var connection = require('./connection.js');
 
 
 
-var burgerMethods = {
+var orm = {
 
-    selectAll: function(){
-        connection.database.connect(function(err){
-            if (err) throw err;
-            console.log("connected as id " + connection.database.threadId);
-            connection.database.query("SELECT * FROM burgers", function(err, res){
+    selectAll: function(table){
+        var queryString = "SELECT * FROM ??";
+         connection.query(queryString, [table], function(err, res){
                 if (err) throw err;
-                for(i = 0; i < res.length; i++){
-                    console.log(res[i].burger_name);
-                }
+                console.log(res);
             });
-            connection.database.end();
-        })
     },
 
-    insertOne: function(){
-        connection.database.connect(function(err){
+    insertOne: function(table, where, value){
+        var queryString = "INSERT INTO ?? (??) VALUES (?)";
+        connection.query(queryString, [table, where, value], function(err, res){
             if (err) throw err;
-            console.log("connected as id " + connection.database.threadId);
-            connection.database.query("INSERT INTO burgers SET ?",
-            {
-                burger_name: "onion burger"
-            });
-            console.log("Buger added");
-            connection.database.end();
-        })
+            console.log(res.insertId);
+        });
     },
 
-    updateOne: function(){
-        connection.database.connect(function(err){
+    updateOne: function(table, set, newVal, where, changedVal){
+        var queryString = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+        connection.query(queryString, [table, set, newVal, where, changedVal], function(err, res){
             if (err) throw err;
-            console.log("connected as id " + connection.database.threadId);
-            connection.database.query("UPDATE burgers SET ? WHERE ?",
-            [
-                {
-                    burger_name: "BBQ Burger"
-                },
-                {
-                    id: 4
-                }
-            ]);
-            console.log("Burger Updated");
-            connection.database.end();
-        })
+            console.log(res.insertId);
+        });
     }
 }    
-// burgerMethods.insertOne();
-// burgerMethods.selectAll();
-// burgerMethods.updateOne();
 
-module.exports = burgerMethods;
+
+module.exports = orm;
 
         

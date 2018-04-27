@@ -1,12 +1,15 @@
+
 <ul>
   {{#each burgers}}
-  <li>
-    <p>
-      {{this.id}}. {{this.burger_name}}
+    {{#unless devoured}}
+      <li>
+        <p>
+          {{this.id}}. {{this.burger_name}}
 
-      <button data-burgerId="{{this.id}}" class="delmovie">Devour Burger!</button>
-    </p>
-  </li>
+          <button data-burgerId="{{this.id}}" class="delburger">Devour Burger!</button>
+        </p>
+      </li>
+    {{/unless}}  
   {{/each}}
 </ul>
 <br>
@@ -16,3 +19,16 @@
   <textarea type="text" name="burger"></textarea>
   <button type="submit">Add Burger!</button>
 </form>
+<br>
+<br>
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      <li>
+        <p>
+          {{this.id}}. {{this.burger_name}}
+        </p>
+      </li>
+    {{/if}}  
+  {{/each}}
+</ul>

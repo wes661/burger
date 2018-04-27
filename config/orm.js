@@ -5,11 +5,13 @@ var connection = require('./connection.js');
 
 var orm = {
 
-    selectAll: function(){
+    selectAll: function(cb){
         var queryString = "SELECT * FROM burgers";
          connection.query(queryString, function(err, res){
-                if (err) throw err;
-                console.log(res);
+                if (err){
+                    throw err;
+                }    
+                cb(res);
             });
     },
 

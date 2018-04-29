@@ -1,0 +1,39 @@
+
+
+body{
+	height: 100%;
+	margin: 0;
+  	width:100%;
+	color: white;
+}
+body::before {
+	content: "";
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100%;
+	width: 100%;
+    background-image: url("../images/burgerbg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+.burgerCol{
+    width: 80%;
+    background: rgba(8, 8, 8, 0.4);
+    border-radius: 20%;
+} 
+.burgerCol2{
+    height: 100%;
+    width: 80%;
+    background: rgba(8, 8, 8, 0.4);
+    border-radius: 20%;
+}   
+
+ul{
+    list-style-type: none;
+}
+.burgerText{
+    font-size: 1.5em;
+}
